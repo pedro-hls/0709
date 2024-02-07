@@ -6,7 +6,7 @@ var speed = 200
 @export var damage = 20
 var enemy = null
 
-# Called when the node enters the scene tree for the first time. a
+# Called when the node enters the scene tree for the first time.
 func _ready():
 	set_as_top_level(true)
 
