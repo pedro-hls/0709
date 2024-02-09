@@ -1,7 +1,8 @@
-[gd_scene load_steps=56 format=3 uid="uid://comjk5mlsft6d"]
+[gd_scene load_steps=57 format=3 uid="uid://comjk5mlsft6d"]
 
 [ext_resource type="Script" path="res://player/scripts/CharacterBody2D.gd" id="1_x5fs4"]
 [ext_resource type="Texture2D" uid="uid://rn1rp1bldgef" path="res://player/sprites/player_sheet.png" id="2_n1gtn"]
+[ext_resource type="Texture2D" uid="uid://bldia127lqctg" path="res://player/sprites/shadow.png" id="2_xw3qw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhxig"]
 radius = 129.0
@@ -10,15 +11,15 @@ radius = 129.0
 radius = 5.0
 height = 12.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cdl60"]
-atlas = ExtResource("2_n1gtn")
-region = Rect2(320, 32, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_6boh8"]
+atlas = ExtResource("2_xw3qw")
+region = Rect2(0, 32, 32, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xofkg"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cdl60")
+"texture": SubResource("AtlasTexture_6boh8")
 }],
 "loop": false,
 "name": &"shadow",
@@ -471,27 +472,32 @@ slide_on_ceiling = false
 script = ExtResource("1_x5fs4")
 
 [node name="BowRangeArea" type="Area2D" parent="."]
+visible = false
 
 [node name="BowRange" type="CollisionShape2D" parent="BowRangeArea"]
+visible = false
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_xhxig")
 debug_color = Color(0.756863, 0, 0.12549, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 y_sort_enabled = true
 position = Vector2(0, -2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_r8pbl")
 
 [node name="Node2D" type="Node2D" parent="."]
+visible = false
 
 [node name="Marker2D" type="Marker2D" parent="."]
+visible = false
 position = Vector2(0, -12)
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+[node name="shadow" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.560784)
 z_index = -1
-position = Vector2(0.5, 2)
+position = Vector2(0.5, -5)
 sprite_frames = SubResource("SpriteFrames_xofkg")
 animation = &"shadow"
 
@@ -499,7 +505,7 @@ animation = &"shadow"
 y_sort_enabled = true
 position = Vector2(0.5, -15)
 sprite_frames = SubResource("SpriteFrames_6adoj")
-animation = &"bow_west"
+animation = &"idle_south"
 
 [connection signal="body_entered" from="BowRangeArea" to="." method="_on_bow_range_area_body_entered"]
 [connection signal="body_exited" from="BowRangeArea" to="." method="_on_bow_range_area_body_exited"]

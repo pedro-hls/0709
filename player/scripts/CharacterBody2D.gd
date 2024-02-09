@@ -37,23 +37,21 @@ func _physics_process(delta):
 	if direction.x != 0 or direction.y != 0:
 		player_state = "walking"
 	
-	if Input.is_action_just_pressed("f"):
+	if Input.is_action_just_pressed("f") and !dash_cooldown and !isdead:
+		velocity = direction.normalized() * speed * 3
 		isdashing = true
 		await get_tree().create_timer(0.2).timeout
-		start_dashing_cooldown()
 		isdashing = false
+		start_dashing_cooldown()
 		
-	if isdashing and !dash_cooldown:
-		velocity = direction.normalized() * speed * 3
-	
-	if !isdashing:
+	if !isdashing and !isdead:
 		velocity = direction.normalized() * speed
 	
 	if !bow_attacking and !isdead:
 		move_and_slide()
 		play_animation(direction)
 	
-	if bow_attacking:
+	if bow_attacking and !isdead:
 		position += direction * 0
 		play_animation(direction)
 		
@@ -78,7 +76,7 @@ func find_closest_enemy():
 			closest_enemy = enemy
 			
 	update_arrow(closest_enemy)
-
+	
 #Instanciar a flecha na cena
 func update_arrow(closest_enemy):
 	if closest_enemy and !bow_attacking:

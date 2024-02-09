@@ -70,7 +70,6 @@ func _on_damage_arrow_area_entered(area):
 		var arrow_instance = area as Arrowattack
 		var damage = arrow_instance.get_damage()
 		take_damage(damage)
-		await get_tree().create_timer(0.1).timeout
 		area.queue_free()
 
 #Damage
@@ -88,11 +87,11 @@ func take_damage(damage):
 	modulate.a8 = 255
 	await get_tree().create_timer(0.3).timeout
 	
-#Death
+#Deathw
 func death():
 	dead = true
 	$AnimatedSprite2D.play("death")
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.6).timeout
 	queue_free()
 	print("Slime Morreu")
 
