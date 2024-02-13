@@ -468,30 +468,26 @@ animations = [{
 
 [node name="player" type="CharacterBody2D"]
 y_sort_enabled = true
+collision_mask = 7
 slide_on_ceiling = false
 script = ExtResource("1_x5fs4")
 
 [node name="BowRangeArea" type="Area2D" parent="."]
-visible = false
 
 [node name="BowRange" type="CollisionShape2D" parent="BowRangeArea"]
-visible = false
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_xhxig")
 debug_color = Color(0.756863, 0, 0.12549, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 y_sort_enabled = true
 position = Vector2(0, -2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_r8pbl")
 
 [node name="Node2D" type="Node2D" parent="."]
-visible = false
 
 [node name="Marker2D" type="Marker2D" parent="."]
-visible = false
 position = Vector2(0, -12)
 
 [node name="shadow" type="AnimatedSprite2D" parent="."]
@@ -505,7 +501,7 @@ animation = &"shadow"
 y_sort_enabled = true
 position = Vector2(0.5, -15)
 sprite_frames = SubResource("SpriteFrames_6adoj")
-animation = &"idle_south"
+animation = &"walking_east"
 
 [connection signal="body_entered" from="BowRangeArea" to="." method="_on_bow_range_area_body_entered"]
 [connection signal="body_exited" from="BowRangeArea" to="." method="_on_bow_range_area_body_exited"]

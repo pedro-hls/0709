@@ -1,17 +1,64 @@
-[gd_scene load_steps=4 format=3 uid="uid://3lapr8d1t1hv"]
+[gd_scene load_steps=10 format=3 uid="uid://3lapr8d1t1hv"]
 
 [ext_resource type="Script" path="res://player/scripts/arrow.gd" id="1_67qsv"]
-[ext_resource type="Texture2D" uid="uid://cbffr5osh8e6q" path="res://player/sprites/normal arrow.png" id="2_nwll5"]
+[ext_resource type="Texture2D" uid="uid://rn1rp1bldgef" path="res://player/sprites/player_sheet.png" id="2_scltc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npi3q"]
+atlas = ExtResource("2_scltc")
+region = Rect2(352, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f04yd"]
+atlas = ExtResource("2_scltc")
+region = Rect2(352, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gb0r"]
+atlas = ExtResource("2_scltc")
+region = Rect2(352, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwp53"]
+atlas = ExtResource("2_scltc")
+region = Rect2(352, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xweic"]
+atlas = ExtResource("2_scltc")
+region = Rect2(352, 160, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t0h0w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npi3q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f04yd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2gb0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwp53")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xweic")
+}],
+"loop": true,
+"name": &"default_arrow",
+"speed": 15.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5pauq"]
 size = Vector2(7.1111, 17.7778)
 
 [node name="arrow" type="Area2D"]
+collision_mask = 7
+input_pickable = false
 script = ExtResource("1_67qsv")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-6, -0.5)
-texture = ExtResource("2_nwll5")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-6, 0.5)
+sprite_frames = SubResource("SpriteFrames_t0h0w")
+animation = &"default_arrow"
+frame_progress = 0.316219
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.500003, 8.9407e-08)

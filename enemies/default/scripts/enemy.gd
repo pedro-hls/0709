@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Green_slime
 
-@export var normal_speed = 30
+@export var normal_speed = 35
 var health = 40
 var direction
 var dead = false
@@ -14,20 +14,27 @@ var damage = 20
 var speed = normal_speed
 var enemy_collision = false
 
+@onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
+@export var target = CharacterBody2D
+
 func ready():
 	dead = false
+	Player
 
 func _physics_process(delta):
-	if !dead:
-		$detection_area/detection.disabled = false
-		$limit_area/limit.disabled = false
-		$hitbox/CollisionShape2D.disabled = false
-		
 			
-		if player_in_area and !knockbacking:
-			direction = (Player.position - position).normalized()
-			speed = normal_speed
-			velocity = direction * speed * delta * 100
+		if player_in_area and !knockbacking and !dead:
+			$detection_area/detection.disabled = false
+			$limit_area/limit.disabled = false
+			$hitbox/CollisionShape2D.disabled = false
+			
+			#direction = (Player.position - position).normalized()
+			#speed = normal_speed
+			#velocity = direction * speed * delta * 100
+			#move_and_slide()
+			
+			direction = to_local(nav_agent.get_next_path_position()).normalized()
+			velocity = direction * speed
 			move_and_slide()
 				
 			if direction.y > 0 and direction.y > abs(direction.x):
@@ -45,13 +52,12 @@ func _physics_process(delta):
 		if knockbacking:
 			velocity = direction * speed * delta * 4
 			knockbacking_delay()
-			
-	if dead:
-		$AnimatedSprite2D.play("death")
-		$detection_area/detection.disabled = true
-		$limit_area/limit.disabled = true
-		$hitbox/CollisionShape2D.disabled = true
-		
+
+#Quando o player inicia fora do range, da erro
+func make_path():
+	if Player != null:
+		nav_agent.target_position = Player.global_position
+	
 #Detection Range
 func _on_detection_area_body_entered(body):
 	if body is Player:
@@ -91,6 +97,9 @@ func take_damage(damage):
 func death():
 	dead = true
 	$AnimatedSprite2D.play("death")
+	$detection_area/detection.disabled = true
+	$limit_area/limit.disabled = true
+	$hitbox/CollisionShape2D.disabled = true
 	await get_tree().create_timer(0.6).timeout
 	queue_free()
 	print("Slime Morreu")
@@ -112,3 +121,10 @@ func _on_hitbox_body_entered(body):
 
 func enemy():
 	pass
+
+func _on_timer_timeout():
+	make_path()
+
+
+func _on_navigation_agent_2d_velocity_computed(safe_velocity):
+	pass # Replace with function body.

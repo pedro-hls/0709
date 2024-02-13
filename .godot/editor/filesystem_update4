@@ -1,7 +1,7 @@
-res://enemies/default/scenes/enemy.tscn
+res://player/scenes/arrow.tscn
 res://enemies/default/scripts/enemy.gd
 res://player/scripts/cam_player.gd
-res://player/scenes/arrow.tscn
 res://player/scenes/player.tscn
+res://enemies/default/scenes/enemy.tscn
 res://world/world.tscn
 res://player/scripts/CharacterBody2D.gd

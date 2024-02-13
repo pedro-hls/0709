@@ -10,12 +10,8 @@ radius = 129.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_7u4ej"]
 radius = 246.073
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3jcgu"]
-radius = 6.0
-height = 16.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_07eu4"]
-radius = 6.0
+radius = 5.0
 height = 14.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xrbhn"]
@@ -243,42 +239,35 @@ animations = [{
 "speed": 4.0
 }]
 
-[node name="slime_green" type="CharacterBody2D" groups=["enemies"]]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3jcgu"]
+radius = 6.0
+height = 14.0
+
+[node name="slime_green" type="CharacterBody2D" node_paths=PackedStringArray("target") groups=["enemies"]]
 y_sort_enabled = true
 position = Vector2(0, -5)
+collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_almdc")
+target = NodePath(".")
 
 [node name="detection_area" type="Area2D" parent="."]
-visible = false
 
 [node name="detection" type="CollisionShape2D" parent="detection_area"]
-visible = false
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_hme8i")
 debug_color = Color(0.756863, 0, 0.12549, 0)
 
 [node name="limit_area" type="Area2D" parent="."]
-visible = false
 
 [node name="limit" type="CollisionShape2D" parent="limit_area"]
-visible = false
 z_index = -1
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_7u4ej")
 debug_color = Color(1, 0.803922, 0.811765, 0)
 
-[node name="hitbox" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-visible = false
-position = Vector2(0, 1)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_3jcgu")
-debug_color = Color(0.972549, 0, 0.427451, 0.0941176)
-
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_07eu4")
@@ -297,7 +286,29 @@ position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_psmje")
 animation = &"idle"
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 14.0
+max_speed = 35.0
+debug_enabled = true
+debug_path_custom_color = Color(1, 0.482353, 0.482353, 0.262745)
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_3jcgu")
+debug_color = Color(0.996078, 0, 0.137255, 0.301961)
+
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="limit_area" to="." method="_on_limit_area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="area_entered" from="hitbox" to="." method="_on_damage_arrow_area_entered"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

@@ -3,7 +3,9 @@ extends CharacterBody2D
 class_name Player
 
 @export var speed = 90
-@export var health = 1000
+@export var health = 100
+
+@export var target: Player
 
 var player_state
 
@@ -27,36 +29,42 @@ var isdead = false # Verifica se o Player está morto
 
 var isdashing = false # Verifica se o Player está usando o Dash
 var dash_cooldown = false # Guarda se o Dash está em Cooldown
+var direction 
 
 func _physics_process(delta):
-	var direction = Input.get_vector("a", "d", "w", "s")
+	if !isdead:
+		direction = Input.get_vector("a", "d", "w", "s")
 
-	if direction.x == 0 and direction.y == 0:
-		player_state = "idle"
+		if direction.x == 0 and direction.y == 0:
+			idle_animation()
+			player_state = "idle"
+			
+		if direction.x != 0 or direction.y != 0:
+			player_state = "walking"
 		
-	if direction.x != 0 or direction.y != 0:
-		player_state = "walking"
+		if Input.is_action_just_pressed("f") and !dash_cooldown and !isdashing:
+			isdashing = true
+			print('Dash')
+			velocity = direction.normalized() * speed * 2
+			move_and_slide()
+			await get_tree().create_timer(0.2).timeout
+			isdashing = false
+			start_dashing_cooldown()
+			
+		if !isdashing:
+			velocity = direction.normalized() * speed
 	
-	if Input.is_action_just_pressed("f") and !dash_cooldown and !isdead:
-		velocity = direction.normalized() * speed * 3
-		isdashing = true
-		await get_tree().create_timer(0.2).timeout
-		isdashing = false
-		start_dashing_cooldown()
-		
-	if !isdashing and !isdead:
-		velocity = direction.normalized() * speed
+		if !bow_attacking:
+			move_and_slide()
+			play_animation(direction)
 	
-	if !bow_attacking and !isdead:
-		move_and_slide()
-		play_animation(direction)
-	
-	if bow_attacking and !isdead:
-		position += direction * 0
-		play_animation(direction)
+		if bow_attacking:
+			position += direction * 0
+			bow_animation(direction)
 		
 func _process(delta):
 	if Input.is_action_just_pressed("left_mouse") and bow_cooldown == false and bow_area == true:
+		bow_animation(direction)
 		closest_enemy = null
 		closest_distance = INF
 		find_closest_enemy()
@@ -79,7 +87,7 @@ func find_closest_enemy():
 	
 #Instanciar a flecha na cena
 func update_arrow(closest_enemy):
-	if closest_enemy and !bow_attacking:
+	if closest_enemy and !bow_attacking and !isdead:
 		
 		var arrow_instance = arrow.instantiate()
 		enemy_direction = (closest_enemy.global_position - $Marker2D.global_position)
@@ -135,10 +143,12 @@ func take_damage(damage):
 		$CollisionShape2D.disabled = false
 		damage_cooldown = false
 	
-	if health <= 0:
-		print("Vida Player", health)
+	if health <= 0 and isdead == false:
 		isdead = true
 		death()
+
+func death():
+	$AnimatedSprite2D.play("dead")
 
 func start_damage_cooldown(damage_cooldown):
 	print(damage_cooldown)
@@ -157,33 +167,25 @@ func opacity_animation():
 	await get_tree().create_timer(0.2).timeout
 	modulate.a8 = 255
 
-func death():
-	$AnimatedSprite2D.play("dead")
-
 func player():
 	pass
 
 # Animação Walking
 func play_animation(direction):
-	
-	if !bow_attacking and !isdead:
-		if player_state == "walking":
-			if direction.y < 0 and abs(direction.y) > abs(direction.x):
-				$AnimatedSprite2D.play("walking_north")
-				walking_direction = "north"
-			if direction.x < 0 and abs(direction.x) > abs(direction.y):
-				$AnimatedSprite2D.play("walking_west")
-				walking_direction = "west"
-			if direction.y > 0 and direction.y > abs(direction.x):
-				$AnimatedSprite2D.play("walking_south")
-				walking_direction = "south"
-			if direction.x > 0 and direction.x > abs(direction.y):
-				$AnimatedSprite2D.play("walking_east")
-				walking_direction = "east"
-				
-		if player_state == "idle":
-			idle_animation()
-			
+	if direction.y < 0 and abs(direction.y) > abs(direction.x):
+		$AnimatedSprite2D.play("walking_north")
+		walking_direction = "north"
+	if direction.x < 0 and abs(direction.x) > abs(direction.y):
+		$AnimatedSprite2D.play("walking_west")
+		walking_direction = "west"
+	if direction.y > 0 and direction.y > abs(direction.x):
+		$AnimatedSprite2D.play("walking_south")
+		walking_direction = "south"
+	if direction.x > 0 and direction.x > abs(direction.y):
+		$AnimatedSprite2D.play("walking_east")
+		walking_direction = "east"
+
+func bow_animation(direction):
 	if bow_attacking:
 		if enemy_direction.y < 0 and abs(enemy_direction.y) > abs(enemy_direction.x):
 			$AnimatedSprite2D.play("bow_north")
@@ -194,7 +196,7 @@ func play_animation(direction):
 		if enemy_direction.x > 0 and enemy_direction.x > abs(enemy_direction.y):
 			$AnimatedSprite2D.play("bow_east")
 		stop_bow_attacking()
-
+	
 # Animação Idle
 func idle_animation():
 	if walking_direction == "north":
