@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
-@export var speed = 90
+@export var speed = 100
 @export var health = 100
 
 @export var target: Player
@@ -36,35 +36,33 @@ func _physics_process(delta):
 		direction = Input.get_vector("a", "d", "w", "s")
 
 		if direction.x == 0 and direction.y == 0:
+			velocity = direction.normalized() * speed * 0
 			idle_animation()
 			player_state = "idle"
 			
 		if direction.x != 0 or direction.y != 0:
-			player_state = "walking"
-		
-		if Input.is_action_just_pressed("f") and !dash_cooldown and !isdashing:
-			isdashing = true
-			print('Dash')
-			velocity = direction.normalized() * speed * 2
-			move_and_slide()
-			await get_tree().create_timer(0.2).timeout
-			isdashing = false
-			start_dashing_cooldown()
-			
-		if !isdashing:
 			velocity = direction.normalized() * speed
-	
-		if !bow_attacking:
-			move_and_slide()
 			play_animation(direction)
-	
+			player_state = "walking"
+			
 		if bow_attacking:
 			bow_animation(direction)
-			position += direction * 0
+			velocity = direction * speed * 0
+			
+		move_and_slide()
 		
+		if Input.is_action_just_pressed("dash"):
+			dash()
+
+func dash():
+	speed = speed * 3
+	$dashcooldown.start()
+
+func _on_dashcooldown_timeout():
+	speed = 100
+	
 func _process(delta):
 	if Input.is_action_just_pressed("left_mouse") and bow_cooldown == false and bow_area == true:
-		bow_animation(direction)
 		closest_enemy = null
 		closest_distance = INF
 		find_closest_enemy()
@@ -122,14 +120,8 @@ func start_bow_cooldown():
 
 # Desliga o status de Atacando com o Arco
 func stop_bow_attacking():
-	await get_tree().create_timer(0.4).timeout
+	await get_tree().create_timer(0.2).timeout
 	bow_attacking = false
-
-# Começa o Cooldown para usar o Dash
-func start_dashing_cooldown():
-	dash_cooldown = true
-	await get_tree().create_timer(3).timeout
-	dash_cooldown = false
 
 # Dano ao jogador
 func take_damage(damage):

@@ -393,7 +393,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking_east",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -416,7 +416,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking_north",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -439,7 +439,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking_south",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -462,7 +462,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking_west",
-"speed": 8.0
+"speed": 10.0
 }]
 
 [node name="player" type="CharacterBody2D"]
@@ -500,7 +500,14 @@ animation = &"shadow"
 y_sort_enabled = true
 position = Vector2(0.5, -15)
 sprite_frames = SubResource("SpriteFrames_6adoj")
-animation = &"bow_west"
+animation = &"walking_west"
+frame = 5
+frame_progress = 0.538233
+
+[node name="dashcooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="body_entered" from="BowRangeArea" to="." method="_on_bow_range_area_body_entered"]
 [connection signal="body_exited" from="BowRangeArea" to="." method="_on_bow_range_area_body_exited"]
+[connection signal="timeout" from="dashcooldown" to="." method="_on_dashcooldown_timeout"]
