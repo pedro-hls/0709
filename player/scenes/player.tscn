@@ -1,8 +1,7 @@
-[gd_scene load_steps=57 format=3 uid="uid://comjk5mlsft6d"]
+[gd_scene load_steps=56 format=3 uid="uid://comjk5mlsft6d"]
 
 [ext_resource type="Script" path="res://player/scripts/CharacterBody2D.gd" id="1_x5fs4"]
 [ext_resource type="Texture2D" uid="uid://rn1rp1bldgef" path="res://player/sprites/player_sheet.png" id="2_n1gtn"]
-[ext_resource type="Texture2D" uid="uid://bldia127lqctg" path="res://player/sprites/shadow.png" id="2_xw3qw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhxig"]
 radius = 129.0
@@ -11,15 +10,15 @@ radius = 129.0
 radius = 5.0
 height = 12.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6boh8"]
-atlas = ExtResource("2_xw3qw")
-region = Rect2(0, 32, 32, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jg0b"]
+atlas = ExtResource("2_n1gtn")
+region = Rect2(320, 320, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xofkg"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6boh8")
+"texture": SubResource("AtlasTexture_4jg0b")
 }],
 "loop": false,
 "name": &"shadow",
@@ -62,15 +61,15 @@ region = Rect2(160, 64, 32, 32)
 atlas = ExtResource("2_n1gtn")
 region = Rect2(160, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_et5h6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bne3"]
 atlas = ExtResource("2_n1gtn")
 region = Rect2(224, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0dtyf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6lhr"]
 atlas = ExtResource("2_n1gtn")
 region = Rect2(224, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c705s"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbe55"]
 atlas = ExtResource("2_n1gtn")
 region = Rect2(224, 96, 32, 32)
 
@@ -264,13 +263,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_et5h6")
+"texture": SubResource("AtlasTexture_7bne3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0dtyf")
+"texture": SubResource("AtlasTexture_g6lhr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_c705s")
+"texture": SubResource("AtlasTexture_kbe55")
 }],
 "loop": false,
 "name": &"bow_west",
@@ -493,7 +492,7 @@ position = Vector2(0, -12)
 [node name="shadow" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.560784)
 z_index = -1
-position = Vector2(0.5, -5)
+position = Vector2(0.5, 3)
 sprite_frames = SubResource("SpriteFrames_xofkg")
 animation = &"shadow"
 
@@ -501,7 +500,7 @@ animation = &"shadow"
 y_sort_enabled = true
 position = Vector2(0.5, -15)
 sprite_frames = SubResource("SpriteFrames_6adoj")
-animation = &"walking_east"
+animation = &"bow_west"
 
 [connection signal="body_entered" from="BowRangeArea" to="." method="_on_bow_range_area_body_entered"]
 [connection signal="body_exited" from="BowRangeArea" to="." method="_on_bow_range_area_body_exited"]

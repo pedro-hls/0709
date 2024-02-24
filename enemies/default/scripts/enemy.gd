@@ -93,7 +93,7 @@ func take_damage(damage):
 	modulate.a8 = 255
 	await get_tree().create_timer(0.3).timeout
 	
-#Deathw
+#Death
 func death():
 	dead = true
 	$AnimatedSprite2D.play("death")
