@@ -2,20 +2,20 @@ extends Area2D
 
 class_name Arrowattack
 
-var speed = 175
+var speed = 200
 @export var damage = 20
 var enemy = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_as_top_level(true)
 	animation()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if enemy != null:
-		var direction = (enemy.global_position - global_position).normalized()
-		position += direction * speed * delta
+	var direction = Vector2.RIGHT.rotated(rotation)
+	global_position += speed * direction.normalized() * delta
+	await get_tree().create_timer(1).timeout
+	global_position += speed * direction.normalized() * delta * 0
 	
 func animation():
 	$AnimatedSprite2D.play("default_arrow")

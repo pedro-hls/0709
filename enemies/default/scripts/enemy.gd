@@ -95,10 +95,10 @@ func knockbacking_delay():
 #Death
 func death():
 	dead = true
+	$hitbox/CollisionShape2D.disabled = true
 	$AnimatedSprite2D.play("death")
 	$detection_area/detection.disabled = true
 	$limit_area/limit.disabled = true
-	$hitbox/CollisionShape2D.disabled = true
 	await get_tree().create_timer(0.8).timeout
 	queue_free()
 	print("Slime Morreu")

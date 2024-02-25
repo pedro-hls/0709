@@ -1,7 +1,8 @@
-res://player/scripts/CharacterBody2D.gd
-res://player/scenes/player.tscn
+res://dialogues/dialog_box.tscn
 res://enemies/default/scripts/enemy.gd
+res://npcs/Grazi/[npc]_grazi.gd
 res://player/scripts/cam_player.gd
-res://player/scenes/arrow.tscn
-res://enemies/default/scenes/enemy.tscn
-res://world/world.tscn
+res://dialogues/Grazi/grazi001.tres
+res://npcs/Grazi/[npc]_grazi.tscn
+res://dialogues/Grazi/DialogBox.gd
+res://dialogues/DialogueMetadata.gd

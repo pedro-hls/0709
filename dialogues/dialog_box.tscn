@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://2uga1ufo1swc"]
+
+[ext_resource type="Texture2D" uid="uid://lpl0irejegma" path="res://ui/Dialogue/text_box.png" id="1_bdsii"]
+[ext_resource type="Script" path="res://dialogues/Grazi/DialogBox.gd" id="2_h0cnp"]
+
+[node name="DialogBox" type="NinePatchRect"]
+light_mask = 32
+offset_top = 4.0
+offset_right = 169.0
+offset_bottom = 46.0
+texture = ExtResource("1_bdsii")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+script = ExtResource("2_h0cnp")
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="text" type="RichTextLabel" parent="."]
+top_level = true
+light_mask = 32
+layout_mode = 2
+offset_left = 2.0
+offset_top = 6.0
+offset_right = 45.0
+offset_bottom = 19.0
+bbcode_enabled = true
+fit_content = true
+
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]

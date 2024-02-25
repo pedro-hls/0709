@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DialogMetadata" load_steps=2 format=3 uid="uid://qad6p5sy754j"]
+
+[ext_resource type="Script" path="res://dialogues/DialogueMetadata.gd" id="1_fhcrc"]
+
+[resource]
+script = ExtResource("1_fhcrc")
+msg_queue = Array[String](["aaa", "bbb", "ccc", "ddd"])

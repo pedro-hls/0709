@@ -19,11 +19,12 @@ var closest_enemy = null # Guarda o Inimigo mais próximo do Player
 var enemy_count = 0 # Conta os inimigos que entraram no Range do Arco
 var bow_area = false # Verifica se há Inimigos no Range do Arco
 
+var bow_attacking = false
+
 var arrow = preload("res://player/scenes/arrow.tscn")
-var bow_cooldown = false # Cooldown no uso do Arco
-var bow_attacking = false # Verifica se o Player está atacando com o Arco
 
 var enemy_direction # Guarda a Direção do Inimigo
+var bow_cooldown = false
 
 var isdead = false # Verifica se o Player está morto
 
@@ -35,39 +36,71 @@ func _physics_process(delta):
 	if !isdead:
 		direction = Input.get_vector("a", "d", "w", "s")
 
-		if direction.x == 0 and direction.y == 0:
-			velocity = direction.normalized() * speed * 0
-			idle_animation()
-			player_state = "idle"
+		if !bow_attacking:
+			if direction.x == 0 and direction.y == 0:
+				velocity = direction.normalized() * speed * 0
+				idle_animation()
+				player_state = "idle"
 			
-		if direction.x != 0 or direction.y != 0:
-			velocity = direction.normalized() * speed
-			play_animation(direction)
-			player_state = "walking"
+			if direction.x != 0 or direction.y != 0:
+				velocity = direction.normalized() * speed
+				play_animation(direction)
+				player_state = "walking"
+		
+		if Input.is_action_just_pressed("dash") and $dashcooldown.is_stopped():
+			dash()
 			
 		if bow_attacking:
-			bow_animation(direction)
 			velocity = direction * speed * 0
 			
 		move_and_slide()
-		
-		if Input.is_action_just_pressed("dash"):
-			dash()
 
 func dash():
-	speed = speed * 3
+	speed = speed * 1.8
 	$dashcooldown.start()
 
 func _on_dashcooldown_timeout():
 	speed = 100
 	
 func _process(delta):
-	if Input.is_action_just_pressed("left_mouse") and bow_cooldown == false and bow_area == true:
-		closest_enemy = null
-		closest_distance = INF
-		find_closest_enemy()
+	if Input.is_action_just_pressed("left_mouse") and bow_cooldown == false:
+		var arrow_direction = self.global_position.direction_to(get_global_mouse_position())
+		bow_cooldown = true
 		bow_attacking = true
-		start_bow_cooldown()
+		update_arrow(arrow_direction)
+		bow_animation(arrow_direction)
+		
+		await get_tree().create_timer(0.3).timeout
+		bow_attacking = false	
+
+#Instanciar a flecha na cena
+func update_arrow(arrow_direction): #closest_enemy):
+		
+	var arrow_instance = arrow.instantiate()
+	get_tree().current_scene.add_child(arrow_instance)
+	arrow_instance.global_position = $Marker2D.global_position
+	
+	var arrow_rotation = $Marker2D.global_position.direction_to(get_global_mouse_position()).angle()
+	arrow_instance.rotation = arrow_rotation
+	
+	$bowcooldown.start()
+
+	
+func _on_bowcooldown_timeout():
+	bow_cooldown = false
+
+#Detectar se os Inimigos entraram no Range do arco
+func _on_bow_range_area_body_entered(body):
+	if body.is_in_group("enemies"):
+		bow_area = true
+		enemy_count += 1
+
+#Detectar se os Inimigos sairam do Range do Arco
+func _on_bow_range_area_body_exited(body):
+	if body.is_in_group("enemies"):
+		enemy_count -= 1
+		if enemy_count <= 0:
+			bow_area = false
 
 #Detectar o Inimigo mais próximo
 func find_closest_enemy():
@@ -83,46 +116,6 @@ func find_closest_enemy():
 			
 	update_arrow(closest_enemy)
 	
-#Instanciar a flecha na cena
-func update_arrow(closest_enemy):
-	if closest_enemy and !bow_attacking and !isdead:
-		
-		var arrow_instance = arrow.instantiate()
-		enemy_direction = (closest_enemy.global_position - $Marker2D.global_position)
-		var rotation_angle = atan2(enemy_direction.y, enemy_direction.x)
-		await get_tree().create_timer(0.2).timeout
-		
-		arrow_instance.rotation = rotation_angle
-		arrow_instance.global_position = $Marker2D.global_position
-		arrow_instance.enemy = closest_enemy
-		add_child(arrow_instance)
-		
-		print("Tacando Flecha")
-
-#Detectar se os Inimigos entraram no Range do arco
-func _on_bow_range_area_body_entered(body):
-	if body.is_in_group("enemies"):
-		bow_area = true
-		enemy_count += 1
-
-#Detectar se os Inimigos sairam do Range do Arco
-func _on_bow_range_area_body_exited(body):
-	if body.is_in_group("enemies"):
-		enemy_count -= 1
-		if enemy_count <= 0:
-			bow_area = false
-
-#Cooldown do ataque do arco
-func start_bow_cooldown():
-	bow_cooldown = true
-	await get_tree().create_timer(1.0).timeout
-	bow_cooldown = false
-
-# Desliga o status de Atacando com o Arco
-func stop_bow_attacking():
-	await get_tree().create_timer(0.2).timeout
-	bow_attacking = false
-
 # Dano ao jogador
 func take_damage(damage):
 	
@@ -145,7 +138,6 @@ func death():
 func start_damage_cooldown(damage_cooldown):
 	print(damage_cooldown)
 	
-# Diminui a opacidade do jogador
 func opacity_animation():
 	modulate.a8 = 70
 	await get_tree().create_timer(0.2).timeout
@@ -159,11 +151,9 @@ func opacity_animation():
 	await get_tree().create_timer(0.2).timeout
 	modulate.a8 = 255
 
-func player():
-	pass
 
-# Animação Walking
 func play_animation(direction):
+		
 	if direction.y < 0 and abs(direction.y) > abs(direction.x):
 		$AnimatedSprite2D.play("walking_north")
 		walking_direction = "north"
@@ -177,19 +167,16 @@ func play_animation(direction):
 		$AnimatedSprite2D.play("walking_east")
 		walking_direction = "east"
 
-func bow_animation(direction):
-	if bow_attacking:
-		if enemy_direction.y < 0 and abs(enemy_direction.y) > abs(enemy_direction.x):
-			$AnimatedSprite2D.play("bow_north")
-		if enemy_direction.x < 0 and abs(enemy_direction.x) > abs(enemy_direction.y):
-			$AnimatedSprite2D.play("bow_west")
-		if enemy_direction.y > 0 and enemy_direction.y > abs(enemy_direction.x):
-			$AnimatedSprite2D.play("bow_south")
-		if enemy_direction.x > 0 and enemy_direction.x > abs(enemy_direction.y):
-			$AnimatedSprite2D.play("bow_east")
-		stop_bow_attacking()
-	
-# Animação Idle
+func bow_animation(arrow_direction):
+	if arrow_direction.y < 0 and abs(arrow_direction.y) > abs(arrow_direction.x):
+		$AnimatedSprite2D.play("bow_north")
+	if arrow_direction.x < 0 and abs(arrow_direction.x) > abs(arrow_direction.y):
+		$AnimatedSprite2D.play("bow_west")
+	if arrow_direction.y > 0 and arrow_direction.y > abs(arrow_direction.x):
+		$AnimatedSprite2D.play("bow_south")
+	if arrow_direction.x > 0 and arrow_direction.x > abs(arrow_direction.y):
+		$AnimatedSprite2D.play("bow_east")
+
 func idle_animation():
 	if walking_direction == "north":
 		$AnimatedSprite2D.play("idle_north")
@@ -199,3 +186,6 @@ func idle_animation():
 		$AnimatedSprite2D.play("idle_east")
 	if walking_direction == "south" or walking_direction == null:
 		$AnimatedSprite2D.play("idle_south")
+		
+func player():
+	pass

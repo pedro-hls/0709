@@ -3,13 +3,6 @@
 [ext_resource type="Script" path="res://player/scripts/CharacterBody2D.gd" id="1_x5fs4"]
 [ext_resource type="Texture2D" uid="uid://rn1rp1bldgef" path="res://player/sprites/player_sheet.png" id="2_n1gtn"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xhxig"]
-radius = 129.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r8pbl"]
-radius = 5.0
-height = 12.0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_4jg0b"]
 atlas = ExtResource("2_n1gtn")
 region = Rect2(320, 320, 32, 32)
@@ -465,11 +458,31 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xhxig"]
+radius = 129.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r8pbl"]
+radius = 5.0
+height = 12.0
+
 [node name="player" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_mask = 7
 slide_on_ceiling = false
 script = ExtResource("1_x5fs4")
+
+[node name="shadow" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.560784)
+z_index = -1
+position = Vector2(0.5, 3)
+sprite_frames = SubResource("SpriteFrames_xofkg")
+animation = &"shadow"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0.5, -15)
+sprite_frames = SubResource("SpriteFrames_6adoj")
+animation = &"idle_south"
 
 [node name="BowRangeArea" type="Area2D" parent="."]
 
@@ -488,26 +501,16 @@ shape = SubResource("CapsuleShape2D_r8pbl")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, -12)
-
-[node name="shadow" type="AnimatedSprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.560784)
-z_index = -1
-position = Vector2(0.5, 3)
-sprite_frames = SubResource("SpriteFrames_xofkg")
-animation = &"shadow"
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-y_sort_enabled = true
-position = Vector2(0.5, -15)
-sprite_frames = SubResource("SpriteFrames_6adoj")
-animation = &"walking_west"
-frame = 5
-frame_progress = 0.538233
+gizmo_extents = 2.4
 
 [node name="dashcooldown" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
+[node name="bowcooldown" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="BowRangeArea" to="." method="_on_bow_range_area_body_entered"]
 [connection signal="body_exited" from="BowRangeArea" to="." method="_on_bow_range_area_body_exited"]
 [connection signal="timeout" from="dashcooldown" to="." method="_on_dashcooldown_timeout"]
+[connection signal="timeout" from="bowcooldown" to="." method="_on_bowcooldown_timeout"]

@@ -55,7 +55,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5pauq"]
-size = Vector2(7.1111, 17.7778)
+size = Vector2(7.1111, 21.3333)
 
 [node name="arrow" type="Area2D"]
 collision_mask = 7
