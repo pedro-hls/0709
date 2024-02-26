@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var dialog: Resource
+@export var interacion: Resource
 
 func _ready():
-	DialogBox.add_message(dialog.msg_queue)
+	DialogBox.add_message(interacion.msg_queue)

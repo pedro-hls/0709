@@ -1,32 +1,156 @@
-[gd_scene load_steps=3 format=3 uid="uid://2uga1ufo1swc"]
+[gd_scene load_steps=15 format=3 uid="uid://2uga1ufo1swc"]
 
-[ext_resource type="Texture2D" uid="uid://lpl0irejegma" path="res://ui/Dialogue/text_box.png" id="1_bdsii"]
+[ext_resource type="Texture2D" uid="uid://dmw6tle1s4wey" path="res://dialogues/ui/dialogue-box.png" id="1_i7fqh"]
 [ext_resource type="Script" path="res://dialogues/Grazi/DialogBox.gd" id="2_h0cnp"]
+[ext_resource type="FontFile" uid="uid://kv4kfc77rj4n" path="res://ui/Silkscreen-Bold.ttf" id="3_5g1xs"]
+[ext_resource type="FontFile" uid="uid://nly040e735ul" path="res://ui/Silkscreen-Regular.ttf" id="3_xls84"]
+[ext_resource type="Texture2D" uid="uid://ddjsgxnhfvxwu" path="res://dialogues/ui/portraits/portrails.png" id="7_6nbls"]
 
-[node name="DialogBox" type="NinePatchRect"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgfod"]
+atlas = ExtResource("7_6nbls")
+region = Rect2(0, 21, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kn7u"]
+atlas = ExtResource("7_6nbls")
+region = Rect2(21, 21, 21, 21)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g0aeq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgfod")
+}],
+"loop": false,
+"name": &"gab",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kn7u")
+}],
+"loop": false,
+"name": &"grazi",
+"speed": 0.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vh8fp"]
+atlas = ExtResource("1_i7fqh")
+region = Rect2(0, 32, 90, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5a5ao"]
+atlas = ExtResource("1_i7fqh")
+region = Rect2(0, 96, 90, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vhxva"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vh8fp")
+}],
+"loop": false,
+"name": &"gab",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5a5ao")
+}],
+"loop": false,
+"name": &"grazi",
+"speed": 0.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofmyk"]
+atlas = ExtResource("7_6nbls")
+region = Rect2(21, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dbdq"]
+atlas = ExtResource("7_6nbls")
+region = Rect2(0, 0, 21, 21)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jb1hl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofmyk")
+}],
+"loop": false,
+"name": &"off",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dbdq")
+}],
+"loop": false,
+"name": &"on",
+"speed": 0.0
+}]
+
+[node name="DialogBox" type="Node2D"]
 light_mask = 32
-offset_top = 4.0
-offset_right = 169.0
-offset_bottom = 46.0
-texture = ExtResource("1_bdsii")
-patch_margin_left = 4
-patch_margin_top = 4
-patch_margin_right = 4
-patch_margin_bottom = 4
+scale = Vector2(2, 2)
 script = ExtResource("2_h0cnp")
 
 [node name="timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.05
+
+[node name="NPC" type="AnimatedSprite2D" parent="."]
+position = Vector2(97.5, 16.5)
+sprite_frames = SubResource("SpriteFrames_g0aeq")
+animation = &"grazi"
+
+[node name="Player" type="AnimatedSprite2D" parent="."]
+position = Vector2(-17.5, 16.5)
+sprite_frames = SubResource("SpriteFrames_g0aeq")
+animation = &"gab"
+
+[node name="background" type="AnimatedSprite2D" parent="."]
+position = Vector2(40, 17)
+sprite_frames = SubResource("SpriteFrames_vhxva")
+animation = &"grazi"
+
+[node name="name_display" type="RichTextLabel" parent="."]
+top_level = true
+light_mask = 32
+offset_left = 8.0
+offset_top = 10.0
+offset_right = 280.0
+offset_bottom = 32.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/default_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
+theme_override_fonts/normal_font = ExtResource("3_5g1xs")
+bbcode_enabled = true
+text = "name"
+fit_content = true
 
 [node name="text" type="RichTextLabel" parent="."]
 top_level = true
 light_mask = 32
-layout_mode = 2
-offset_left = 2.0
-offset_top = 6.0
-offset_right = 45.0
-offset_bottom = 19.0
+offset_left = 8.0
+offset_top = 22.0
+offset_right = 288.0
+offset_bottom = 86.0
+scale = Vector2(0.5, 0.5)
+theme_type_variation = &"Extra Spacing / Glyph"
+theme_override_colors/default_color = Color(0.290196, 0.290196, 0.290196, 1)
+theme_override_fonts/normal_font = ExtResource("3_xls84")
+theme_override_fonts/bold_font = ExtResource("3_5g1xs")
 bbcode_enabled = true
+text = "Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text"
 fit_content = true
+visible_characters_behavior = 1
+
+[node name="npc_shadow" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+position = Vector2(97.5, 16.5)
+sprite_frames = SubResource("SpriteFrames_jb1hl")
+animation = &"off"
+
+[node name="player_shadow" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+position = Vector2(-17.5, 16.5)
+sprite_frames = SubResource("SpriteFrames_jb1hl")
+animation = &"off"
 
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]

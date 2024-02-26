@@ -23,8 +23,14 @@ DialogBox="*res://dialogues/dialog_box.tscn"
 
 window/size/viewport_width=320
 window/size/viewport_height=180
+window/size/mode=3
+window/size/initial_position_type=0
 window/size/window_width_override=1280
 window/size/window_height_override=720
+
+[gui]
+
+theme/default_font_antialiasing=0
 
 [input]
 

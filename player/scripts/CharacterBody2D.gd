@@ -63,7 +63,7 @@ func _on_dashcooldown_timeout():
 	speed = 100
 	
 func _process(delta):
-	if Input.is_action_just_pressed("left_mouse") and bow_cooldown == false:
+	if Input.is_action_just_pressed("left_mouse") and bow_cooldown == false and !isdead:
 		var arrow_direction = self.global_position.direction_to(get_global_mouse_position())
 		bow_cooldown = true
 		bow_attacking = true

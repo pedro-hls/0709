@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://byuocvx1acp44"]
+[gd_scene load_steps=16 format=3 uid="uid://byuocvx1acp44"]
 
 [ext_resource type="PackedScene" uid="uid://comjk5mlsft6d" path="res://player/scenes/player.tscn" id="1_11uvj"]
 [ext_resource type="Texture2D" uid="uid://jaoyeca07gx4" path="res://world/sprites/terrain_default_sheet.png" id="3_o177q"]
 [ext_resource type="PackedScene" uid="uid://urdof6843spx" path="res://enemies/default/scenes/enemy.tscn" id="3_xp52k"]
+[ext_resource type="PackedScene" uid="uid://c5880lidwss8d" path="res://npcs/Grazi/[npc]_grazi.tscn" id="4_c6623"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3hlk3"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -441,10 +442,10 @@ layer_0/tile_data = PackedInt32Array(-393227, 1703936, 2, -327691, 1703936, 2, -
 layer_1/name = "shadows"
 layer_1/y_sort_origin = -1
 layer_1/z_index = -1
-layer_1/tile_data = PackedInt32Array(524295, 786432, 10, 655354, 65536, 8, -65522, 65536, 8, 720914, 458752, 8, 524297, 786432, 10, 524299, 786432, 10, 196612, 917504, 9, -196608, 917504, 9)
+layer_1/tile_data = PackedInt32Array(655354, 65536, 8, -65522, 65536, 8, 720914, 458752, 8, -196608, 917504, 9)
 layer_2/name = "trees"
 layer_2/y_sort_enabled = true
-layer_2/tile_data = PackedInt32Array(458746, 65536, 1, -262130, 458752, 1, 458759, 786432, 5, 458761, 786432, 5, 458763, 786432, 5, 524306, 65536, 1, -393216, 917504, 1, 4, 917504, 1)
+layer_2/tile_data = PackedInt32Array(458746, 65536, 1, -262130, 458752, 1, 524306, 65536, 1, -393216, 917504, 1)
 
 [node name="player" parent="." instance=ExtResource("1_11uvj")]
 position = Vector2(23, 80)
@@ -457,3 +458,6 @@ process_callback = 0
 
 [node name="slime_green2" parent="." instance=ExtResource("3_xp52k")]
 position = Vector2(-58, 12)
+
+[node name="[NPC] Grazi" parent="." instance=ExtResource("4_c6623")]
+position = Vector2(-18, 118)
