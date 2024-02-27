@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbgimidjuncnu"]
+
+[ext_resource type="PackedScene" uid="uid://comjk5mlsft6d" path="res://player/scenes/player.tscn" id="1_u8wto"]
+[ext_resource type="PackedScene" uid="uid://db77h263come8" path="res://npcs/Grazi/grazi.tscn" id="2_i4w36"]
+
+[node name="world" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_u8wto")]
+position = Vector2(154, 97)
+speed = 100
+health = 100
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+zoom = Vector2(3, 3)
+
+[node name="grazi" parent="." instance=ExtResource("2_i4w36")]
+position = Vector2(118, 81)

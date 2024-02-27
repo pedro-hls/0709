@@ -32,7 +32,13 @@ var isdashing = false # Verifica se o Player está usando o Dash
 var dash_cooldown = false # Guarda se o Dash está em Cooldown
 var direction 
 
+var npc_in_range = false
+
 func _physics_process(delta):
+	if npc_in_range == true:
+		if Input.is_action_just_pressed("interaction"):
+			DialogueManager.show_dialogue_balloon(load("res://npcs/Grazi/first_dialogue.dialogue"), "start")
+	
 	if !isdead:
 		direction = Input.get_vector("a", "d", "w", "s")
 
@@ -90,31 +96,31 @@ func _on_bowcooldown_timeout():
 	bow_cooldown = false
 
 #Detectar se os Inimigos entraram no Range do arco
-func _on_bow_range_area_body_entered(body):
-	if body.is_in_group("enemies"):
-		bow_area = true
-		enemy_count += 1
-
+#func _on_bow_range_area_body_entered(body):
+	#if body.is_in_group("enemies"):
+		#bow_area = true
+		#enemy_count += 1
+#
 #Detectar se os Inimigos sairam do Range do Arco
-func _on_bow_range_area_body_exited(body):
-	if body.is_in_group("enemies"):
-		enemy_count -= 1
-		if enemy_count <= 0:
-			bow_area = false
-
+#func _on_bow_range_area_body_exited(body):
+	#if body.is_in_group("enemies"):
+		#enemy_count -= 1
+		#if enemy_count <= 0:
+			#bow_area = false
+#
 #Detectar o Inimigo mais próximo
-func find_closest_enemy():
-	var all_enemies = get_tree().get_nodes_in_group("enemies")
-	var player_position = global_position
-	
-	for enemy in all_enemies:
-		var player2enemy = player_position.distance_to(enemy.global_position)
-		
-		if player2enemy < closest_distance:
-			closest_distance = player2enemy
-			closest_enemy = enemy
-			
-	update_arrow(closest_enemy)
+#func find_closest_enemy():
+	#var all_enemies = get_tree().get_nodes_in_group("enemies")
+	#var player_position = global_position
+	#
+	#for enemy in all_enemies:
+		#var player2enemy = player_position.distance_to(enemy.global_position)
+		#
+		#if player2enemy < closest_distance:
+			#closest_distance = player2enemy
+			#closest_enemy = enemy
+			#
+	#update_arrow(closest_enemy)
 	
 # Dano ao jogador
 func take_damage(damage):
@@ -151,9 +157,7 @@ func opacity_animation():
 	await get_tree().create_timer(0.2).timeout
 	modulate.a8 = 255
 
-
 func play_animation(direction):
-		
 	if direction.y < 0 and abs(direction.y) > abs(direction.x):
 		$AnimatedSprite2D.play("walking_north")
 		walking_direction = "north"
@@ -189,3 +193,12 @@ func idle_animation():
 		
 func player():
 	pass
+
+func _on_interacion_area_body_entered(body):
+	if body.is_in_group("npc"):
+		npc_in_range = true
+
+
+func _on_interacion_area_body_exited(body):
+	if body.is_in_group("npc"):
+		npc_in_range = false

@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://sffim1wqbh73"
+path="res://.godot/imported/first_dialogue.dialogue-ce1b3527c6bc6241e98073321ea3ad1d.tres"
+
+[deps]
+
+source_file="res://npcs/Grazi/first_dialogue.dialogue"
+dest_files=["res://.godot/imported/first_dialogue.dialogue-ce1b3527c6bc6241e98073321ea3ad1d.tres"]
+
+[params]
+
+defaults=true

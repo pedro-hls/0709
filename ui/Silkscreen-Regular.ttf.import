@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Silkscreen-Regular.ttf-1af3c113b5c694bebd060d
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
 multichannel_signed_distance_field=false
 msdf_pixel_range=8

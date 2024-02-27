@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://comjk5mlsft6d"]
+[gd_scene load_steps=57 format=3 uid="uid://comjk5mlsft6d"]
 
 [ext_resource type="Script" path="res://player/scripts/CharacterBody2D.gd" id="1_x5fs4"]
 [ext_resource type="Texture2D" uid="uid://rn1rp1bldgef" path="res://player/sprites/player_sheet.png" id="2_n1gtn"]
@@ -458,12 +458,15 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ameq5"]
+radius = 41.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhxig"]
 radius = 129.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r8pbl"]
 radius = 5.0
-height = 12.0
+height = 14.0
 
 [node name="player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -484,6 +487,12 @@ position = Vector2(0.5, -15)
 sprite_frames = SubResource("SpriteFrames_6adoj")
 animation = &"idle_south"
 
+[node name="InteracionArea" type="Area2D" parent="."]
+
+[node name="Interaction" type="CollisionShape2D" parent="InteracionArea"]
+shape = SubResource("CircleShape2D_ameq5")
+debug_color = Color(0.847059, 0.376471, 0, 0.0588235)
+
 [node name="BowRangeArea" type="Area2D" parent="."]
 
 [node name="BowRange" type="CollisionShape2D" parent="BowRangeArea"]
@@ -491,17 +500,17 @@ position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_xhxig")
 debug_color = Color(0.756863, 0, 0.12549, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-y_sort_enabled = true
-position = Vector2(0, -2)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_r8pbl")
-
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, -12)
 gizmo_extents = 2.4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_r8pbl")
 
 [node name="dashcooldown" type="Timer" parent="."]
 wait_time = 0.5
@@ -510,6 +519,8 @@ one_shot = true
 [node name="bowcooldown" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="body_entered" from="InteracionArea" to="." method="_on_interacion_area_body_entered"]
+[connection signal="body_exited" from="InteracionArea" to="." method="_on_interacion_area_body_exited"]
 [connection signal="body_entered" from="BowRangeArea" to="." method="_on_bow_range_area_body_entered"]
 [connection signal="body_exited" from="BowRangeArea" to="." method="_on_bow_range_area_body_exited"]
 [connection signal="timeout" from="dashcooldown" to="." method="_on_dashcooldown_timeout"]

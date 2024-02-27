@@ -1,0 +1,398 @@
+[gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_dfi8v"]
+
+[resource]
+script = ExtResource("1_dfi8v")
+using_states = PackedStringArray()
+titles = {
+"aa": "33",
+"start": "7"
+}
+character_names = PackedStringArray("Grazi", "Gab")
+first_title = "7"
+lines = {
+"1": {
+"id": "1",
+"next_id": "7",
+"text": "start",
+"type": "title"
+},
+"10": {
+"id": "10",
+"mutation": {
+"expression": Array[Dictionary]([{
+"type": "variable",
+"value": "universal"
+}, {
+"type": "dot"
+}, {
+"type": "variable",
+"value": "player"
+}, {
+"type": "assignment",
+"value": "="
+}, {
+"type": "variable",
+"value": "dialogue_line"
+}, {
+"type": "dot"
+}, {
+"type": "variable",
+"value": "character"
+}])
+},
+"next_id": "11",
+"type": "mutation"
+},
+"11": {
+"character": "Grazi",
+"character_replacements": Array[Dictionary]([]),
+"id": "11",
+"next_id": "12",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "como assim?",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "como assim?",
+"type": "dialogue"
+},
+"12": {
+"character": "Gab",
+"character_replacements": Array[Dictionary]([]),
+"id": "12",
+"next_id": "13",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "...",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "...",
+"type": "dialogue"
+},
+"13": {
+"character": "Grazi",
+"character_replacements": Array[Dictionary]([]),
+"id": "13",
+"next_id": "14",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "encontrei suas coisas na floresta hoje de manha",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "encontrei suas coisas na floresta hoje de manha",
+"type": "dialogue"
+},
+"14": {
+"character": "Gab",
+"character_replacements": Array[Dictionary]([]),
+"id": "14",
+"next_id": "15",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "coisas? to confusa...",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "coisas? to confusa...",
+"type": "dialogue"
+},
+"15": {
+"character": "Grazi",
+"character_replacements": Array[Dictionary]([]),
+"id": "15",
+"next_id": "16",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Sim uai, toma aqui",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Sim uai, toma aqui",
+"type": "dialogue"
+},
+"16": {
+"character": "Gab",
+"character_replacements": Array[Dictionary]([]),
+"id": "16",
+"next_id": "17",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Sua mochila e seu arco",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Sua mochila e seu arco",
+"type": "dialogue"
+},
+"17": {
+"character": "Gab",
+"character_replacements": Array[Dictionary]([]),
+"id": "17",
+"next_id": "18",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "obrigado irma...",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "obrigado irma...",
+"type": "dialogue"
+},
+"18": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "18",
+"next_id": "19",
+"next_id_after": "22",
+"notes": "",
+"responses": PackedStringArray("18", "20"),
+"tags": PackedStringArray(),
+"text": "Só tinha isso?",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Só tinha isso?",
+"type": "response"
+},
+"19": {
+"character": "Grazi",
+"character_replacements": Array[Dictionary]([]),
+"id": "19",
+"next_id": "22",
+"notes": "",
+"parent_id": "18",
+"tags": PackedStringArray(),
+"text": "só nao achei seu óculos, mas estamos em um jogo então não tem problema",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "só nao achei seu óculos, mas estamos em um jogo então não tem problema",
+"type": "dialogue"
+},
+"20": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "20",
+"next_id": "21",
+"next_id_after": "22",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "mas... e meu óculos?",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "mas... e meu óculos?",
+"type": "response"
+},
+"21": {
+"character": "Grazi",
+"character_replacements": Array[Dictionary]([]),
+"id": "21",
+"next_id": "22",
+"notes": "",
+"parent_id": "20",
+"tags": PackedStringArray(),
+"text": "Estamos em um jogo gabinha, nao precisamos de óculos",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Estamos em um jogo gabinha, nao precisamos de óculos",
+"type": "dialogue"
+},
+"22": {
+"character": "Gab",
+"character_replacements": Array[Dictionary]([]),
+"id": "22",
+"next_id": "23",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Estamos?",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Estamos?",
+"type": "dialogue"
+},
+"23": {
+"character": "Grazi",
+"character_replacements": Array[Dictionary]([]),
+"id": "23",
+"next_id": "24",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Sim... descobri recentemente",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Sim... descobri recentemente",
+"type": "dialogue"
+},
+"24": {
+"character": "Gab",
+"character_replacements": Array[Dictionary]([]),
+"id": "24",
+"next_id": "25",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "...",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "...",
+"type": "dialogue"
+},
+"25": {
+"character": "Grazi",
+"character_replacements": Array[Dictionary]([]),
+"id": "25",
+"next_id": "26",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Cadê Pedro?",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Cadê Pedro?",
+"type": "dialogue"
+},
+"26": {
+"character": "Gab",
+"character_replacements": Array[Dictionary]([]),
+"id": "26",
+"next_id": "27",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "não sei...",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "não sei...",
+"type": "dialogue"
+},
+"27": {
+"character": "Gab",
+"character_replacements": Array[Dictionary]([]),
+"id": "27",
+"next_id": "28",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "não lembro o que aconteceu",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "não lembro o que aconteceu",
+"type": "dialogue"
+},
+"28": {
+"character": "Grazi",
+"character_replacements": Array[Dictionary]([]),
+"id": "28",
+"next_id": "30",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "como assim?? vai procurar ele!",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "como assim?? vai procurar ele!",
+"type": "dialogue"
+},
+"30": {
+"id": "30",
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"32": {
+"id": "32",
+"next_id": "33",
+"text": "aa",
+"type": "title"
+},
+"33": {
+"character": "Grazi",
+"character_replacements": Array[Dictionary]([]),
+"id": "33",
+"next_id": "34",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "aaaaa",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "aaaaa",
+"type": "dialogue"
+},
+"34": {
+"character": "Gab",
+"character_replacements": Array[Dictionary]([]),
+"id": "34",
+"next_id": "35",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "bbbbb",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "bbbbb",
+"type": "dialogue"
+},
+"35": {
+"id": "35",
+"is_snippet": false,
+"next_id": "end",
+"type": "goto"
+},
+"7": {
+"character": "Grazi",
+"character_replacements": Array[Dictionary]([]),
+"id": "7",
+"next_id": "8",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "irma!! Vocês não voltaram ontem, o que aconteceu?",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "irma!! Vocês não voltaram ontem, o que aconteceu?",
+"type": "dialogue"
+},
+"8": {
+"id": "8",
+"mutation": {
+"expression": Array[Dictionary]([{
+"type": "variable",
+"value": "universal"
+}, {
+"type": "dot"
+}, {
+"type": "variable",
+"value": "npc"
+}, {
+"type": "assignment",
+"value": "="
+}, {
+"type": "variable",
+"value": "dialogue_line"
+}, {
+"type": "dot"
+}, {
+"type": "variable",
+"value": "character"
+}])
+},
+"next_id": "9",
+"type": "mutation"
+},
+"9": {
+"character": "Gab",
+"character_replacements": Array[Dictionary]([]),
+"id": "9",
+"next_id": "10",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "E-eu não sei... nao lembro de nada",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "E-eu não sei... nao lembro de nada",
+"type": "dialogue"
+}
+}
+raw_text = "~ start
+
+#[[A|B]] Aleatório
+#set variable Coloca um valor na variavel
+#DialogueManager.show_exemple_dialogue_balloon(load(\"path\"), \"start\")
+#Usar essas  var para mudar as animações da caixa de texto e das imagens
+Grazi: irma!! Vocês não voltaram ontem, o que aconteceu?
+set universal.npc = dialogue_line.character
+Gab: E-eu não sei... nao lembro de nada
+set universal.player = dialogue_line.character
+Grazi: como assim?
+Gab: ...
+Grazi: encontrei suas coisas na floresta hoje de manha
+Gab: coisas? to confusa...
+Grazi: Sim uai, toma aqui
+Gab: Sua mochila e seu arco
+Gab: obrigado irma...
+ - Só tinha isso?
+	Grazi: só nao achei seu óculos, mas estamos em um jogo então não tem problema
+ - mas... e meu óculos?
+	Grazi: Estamos em um jogo gabinha, nao precisamos de óculos
+Gab: Estamos?
+Grazi: Sim... descobri recentemente
+Gab: ...
+Grazi: Cadê Pedro?
+Gab: não sei...
+Gab: não lembro o que aconteceu
+Grazi: como assim?? vai procurar ele!
+
+=> END
+
+~ aa
+Grazi: aaaaa
+Gab: bbbbb
+=> END"
+metadata/dialogue_manager_version = "2.34.1"

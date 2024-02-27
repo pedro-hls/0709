@@ -1,0 +1,35 @@
+~ start
+
+#[[A|B]] Aleatório
+#set variable Coloca um valor na variavel
+#DialogueManager.show_exemple_dialogue_balloon(load("path"), "start")
+#Usar essas  var para mudar as animações da caixa de texto e das imagens
+Grazi: irma!! Vocês não voltaram ontem, o que aconteceu?
+set universal.npc = dialogue_line.character
+Gab: E-eu não sei... nao lembro de nada
+set universal.player = dialogue_line.character
+Grazi: como assim?
+Gab: ...
+Grazi: encontrei suas coisas na floresta hoje de manha
+Gab: coisas? to confusa...
+Grazi: Sim uai, toma aqui
+Gab: Sua mochila e seu arco
+Gab: obrigado irma...
+ - Só tinha isso?
+	Grazi: só nao achei seu óculos, mas estamos em um jogo então não tem problema
+ - mas... e meu óculos?
+	Grazi: Estamos em um jogo gabinha, nao precisamos de óculos
+Gab: Estamos?
+Grazi: Sim... descobri recentemente
+Gab: ...
+Grazi: Cadê Pedro?
+Gab: não sei...
+Gab: não lembro o que aconteceu
+Grazi: como assim?? vai procurar ele!
+
+=> END
+
+~ aa
+Grazi: aaaaa
+Gab: bbbbb
+=> END

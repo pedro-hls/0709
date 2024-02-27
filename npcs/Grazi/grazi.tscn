@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://db77h263come8"]
+
+[ext_resource type="Texture2D" uid="uid://dqg885d3oyb05" path="res://npcs/npcs.png" id="1_qydxr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x3fch"]
+radius = 5.0
+height = 14.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfs3d"]
+atlas = ExtResource("1_qydxr")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gw3t"]
+atlas = ExtResource("1_qydxr")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hryg2"]
+atlas = ExtResource("1_qydxr")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k8gt7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfs3d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gw3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hryg2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[node name="grazi" type="CharacterBody2D" groups=["npc"]]
+position = Vector2(0, -16)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 14)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_x3fch")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_k8gt7")
+animation = &"idle"
+offset = Vector2(0.5, 0)
