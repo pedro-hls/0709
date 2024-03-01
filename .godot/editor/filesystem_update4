@@ -1,4 +1,5 @@
 res://player/scenes/player.tscn
+res://dialogues/Player/balloon.gd
 res://enemies/default/scripts/enemy.gd
 res://npcs/Grazi/grazi.gd
 res://dialogues/Player/player_dialogue_button.tres
@@ -6,6 +7,7 @@ res://world/scenes/world.tscn
 res://npcs/Grazi/grazi.tscn
 res://enemies/default/scenes/enemy.tscn
 res://dialogues/Player/balloon.tscn
+res://player/scenes/arrow.tscn
 res://player/scripts/CharacterBody2D.gd
-res://dialogues/Player/image.gd
 res://world/universal.gd
+res://addons/dialogue_manager/dialogue_manager.gd

@@ -23,14 +23,18 @@ func ready():
 
 func _physics_process(delta):
 		direction = to_local(nav_agent.get_next_path_position()).normalized()
+		
+		if !player_in_area:
+			$AnimatedSprite2D.play("idle")
+			velocity = direction * speed * 0
 			
 		if player_in_area and !dead:
+			$hitbox/CollisionShape2D.disabled = false
 			$detection_area/detection.disabled = false
 			$limit_area/limit.disabled = false
-			$hitbox/CollisionShape2D.disabled = false
 			
 			velocity = direction * speed
-				
+
 			if direction.y > 0 and direction.y > abs(direction.x):
 				$AnimatedSprite2D.play("walking_south")
 			if direction.x > 0 and direction.x > abs(direction.y):
@@ -39,12 +43,9 @@ func _physics_process(delta):
 				$AnimatedSprite2D.play("walking_west")
 			if direction.y < 0 and abs(direction.y) > abs(direction.x):
 				$AnimatedSprite2D.play("walking_north")
-					
-		if !player_in_area:
-			$AnimatedSprite2D.play("idle")
-			velocity = direction * speed * 0
-			
+						
 		if knockbacking:
+			print("b")
 			velocity = direction * speed * 0
 			
 		move_and_slide()
@@ -52,6 +53,7 @@ func _physics_process(delta):
 func make_path():
 	if Player != null:
 		nav_agent.target_position = Player.global_position
+		print(nav_agent.target_position)
 	
 #Detection Range
 func _on_detection_area_body_entered(body):
@@ -95,8 +97,8 @@ func knockbacking_delay():
 #Death
 func death():
 	dead = true
-	$hitbox/CollisionShape2D.disabled = true
 	$AnimatedSprite2D.play("death")
+	$hitbox/CollisionShape2D.disabled = true
 	$detection_area/detection.disabled = true
 	$limit_area/limit.disabled = true
 	await get_tree().create_timer(0.8).timeout
@@ -113,7 +115,6 @@ func enemy():
 
 func _on_timer_timeout():
 	make_path()
-
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity):
 	pass # Replace with function body.

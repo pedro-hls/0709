@@ -328,6 +328,7 @@ path_postprocessing = 1
 avoidance_enabled = true
 radius = 14.0
 max_speed = 35.0
+debug_enabled = true
 debug_path_custom_color = Color(0.811765, 0.560784, 0.823529, 0.0235294)
 
 [node name="hitbox" type="Area2D" parent="."]

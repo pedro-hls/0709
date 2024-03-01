@@ -1,12 +1,12 @@
-res://world
+res://player/scenes
 res://dialogues/ui/portraits
-res://dialogues/ui
 res://dialogues/Player
+res://dialogues/ui
+res://world
 res://ui
 res://enemies/default/scenes
 res://npcs
 res://npcs/Grazi
-res://player/scenes
 res://
 res://world/scenes
 res://world/sprites

@@ -22,7 +22,7 @@ var responses: Array = []:
 
 			remove_child(item)
 			item.queue_free()
-
+			
 		# Add new items
 		if responses.size() > 0:
 			for response in responses:

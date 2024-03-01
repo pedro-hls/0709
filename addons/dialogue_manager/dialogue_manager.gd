@@ -125,6 +125,8 @@ func get_next_dialogue_line(resource: DialogueResource, key: String = "", extra_
 	# If our dialogue is nothing then we hit the end
 	if not is_valid(dialogue):
 		dialogue_ended.emit(resource)
+		universal.talking = false
+		universal.add_talking_cooldown()
 		return null
 
 	# Run the mutation if it is one

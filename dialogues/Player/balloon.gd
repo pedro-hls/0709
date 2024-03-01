@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+class_name Defaultballoon
 ## The action to use for advancing the dialogue
 const NEXT_ACTION = &"ui_accept"
 
@@ -41,16 +42,42 @@ var dialogue_line: DialogueLine:
 			await ready
 
 		dialogue_line = next_dialogue_line
-
+		
 		character_label.visible = not dialogue_line.character.is_empty()
 		character_label.text = tr(dialogue_line.character, "dialogue")
-
+		
+		var next_speaker
+		var text_color
+		var name_color
+		
+		next_speaker = dialogue_line.character
+		universal.speaker = next_speaker
+		text_color = universal.text_colors[next_speaker]
+		name_color = universal.name_colors[next_speaker]
+		%background.play(next_speaker)
+		
+		if universal.left_is_player == true:
+			%player_image.play("Gab")
+			%player_name.text = "[center][color='%s']%s[/color][/center]" % [universal.name_colors["Gab"], "Gab"]
+		
+		if next_speaker != "Gab":
+			%player_shadow.show()
+			%npc_shadow.hide()
+			%npc_image.play(next_speaker)
+			dialogue_line.text = "[color='%s']%s[/color]" % [text_color, tr(dialogue_line.text, "dialogue")]
+			%npc_name.text = "[center][color='%s']%s[/color][/center]" % [name_color, next_speaker]
+			
+		if next_speaker == "Gab":
+			%player_shadow.hide()
+			%npc_shadow.show()
+			dialogue_line.text = "[color='%s']%s[/color]" % [text_color, tr(dialogue_line.text, "dialogue")]
+		
 		dialogue_label.hide()
 		dialogue_label.dialogue_line = dialogue_line
 
 		responses_menu.hide()
 		responses_menu.set_responses(dialogue_line.responses)
-
+		
 		# Show our balloon
 		balloon.show()
 		will_hide_balloon = false
@@ -80,11 +107,9 @@ func _ready() -> void:
 	balloon.hide()
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
 
-
 func _unhandled_input(_event: InputEvent) -> void:
 	# Only the balloon is allowed to handle input while it's showing
 	get_viewport().set_input_as_handled()
-
 
 ## Start some dialogue
 func start(dialogue_resource: DialogueResource, title: String, extra_game_states: Array = []) -> void:

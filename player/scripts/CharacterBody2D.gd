@@ -31,15 +31,18 @@ var isdead = false # Verifica se o Player está morto
 var isdashing = false # Verifica se o Player está usando o Dash
 var dash_cooldown = false # Guarda se o Dash está em Cooldown
 var direction 
-
 var npc_in_range = false
+
+var talking = false
 
 func _physics_process(delta):
 	if npc_in_range == true:
-		if Input.is_action_just_pressed("interaction"):
+		if Input.is_action_just_pressed("interaction") and !universal.talking and !universal.talking_cooldown:
 			DialogueManager.show_dialogue_balloon(load("res://npcs/Grazi/first_dialogue.dialogue"), "start")
+			idle_animation()
+			universal.talking = true
 	
-	if !isdead:
+	if !isdead and !universal.talking:
 		direction = Input.get_vector("a", "d", "w", "s")
 
 		if !bow_attacking:
@@ -69,12 +72,35 @@ func _on_dashcooldown_timeout():
 	speed = 100
 	
 func _process(delta):
-	if Input.is_action_just_pressed("left_mouse") and bow_cooldown == false and !isdead:
-		var arrow_direction = self.global_position.direction_to(get_global_mouse_position())
-		bow_cooldown = true
-		bow_attacking = true
-		update_arrow(arrow_direction)
-		bow_animation(arrow_direction)
+	if Input.is_action_just_pressed("shoot") and bow_cooldown == false and !isdead:
+		#var arrow_direction = self.global_position.direction_to(get_global_mouse_position())
+		var aim_right = Input.is_action_pressed("aim_right")
+		var aim_left = Input.is_action_pressed("aim_left")
+		var aim_up = Input.is_action_pressed("aim_up")
+		var aim_down = Input.is_action_pressed("aim_down")
+		
+		var joystick_x = Input.get_joy_axis(0, 2)
+		var joystick_y = Input.get_joy_axis(0, 3)
+		
+		if aim_right or aim_left or aim_up or aim_down or joystick_x != 0 or joystick_y != 0:
+			var arrow_direction = Vector2(joystick_x, joystick_y)
+			if aim_right:
+				arrow_direction.x = 1
+			elif aim_left:
+				arrow_direction.x = -1
+			if aim_up:
+				arrow_direction.y = -1
+			elif aim_down:
+				arrow_direction.y = 1
+				
+			update_arrow(arrow_direction)
+			bow_animation(arrow_direction)
+			
+			bow_cooldown = true
+			bow_attacking = true
+				
+		#update_arrow(arrow_direction)
+		#bow_animation(arrow_direction)
 		
 		await get_tree().create_timer(0.3).timeout
 		bow_attacking = false	
@@ -86,7 +112,8 @@ func update_arrow(arrow_direction): #closest_enemy):
 	get_tree().current_scene.add_child(arrow_instance)
 	arrow_instance.global_position = $Marker2D.global_position
 	
-	var arrow_rotation = $Marker2D.global_position.direction_to(get_global_mouse_position()).angle()
+	var arrow_rotation = arrow_direction.angle()
+	#var arrow_rotation = $Marker2D.global_position.direction_to(get_global_mouse_position()).angle()
 	arrow_instance.rotation = arrow_rotation
 	
 	$bowcooldown.start()
@@ -172,13 +199,13 @@ func play_animation(direction):
 		walking_direction = "east"
 
 func bow_animation(arrow_direction):
-	if arrow_direction.y < 0 and abs(arrow_direction.y) > abs(arrow_direction.x):
+	if arrow_direction.y <= 0 and abs(arrow_direction.y) >= abs(arrow_direction.x):
 		$AnimatedSprite2D.play("bow_north")
-	if arrow_direction.x < 0 and abs(arrow_direction.x) > abs(arrow_direction.y):
+	if arrow_direction.x <= 0 and abs(arrow_direction.x) >= abs(arrow_direction.y):
 		$AnimatedSprite2D.play("bow_west")
-	if arrow_direction.y > 0 and arrow_direction.y > abs(arrow_direction.x):
+	if arrow_direction.y >= 0 and arrow_direction.y >= abs(arrow_direction.x):
 		$AnimatedSprite2D.play("bow_south")
-	if arrow_direction.x > 0 and arrow_direction.x > abs(arrow_direction.y):
+	if arrow_direction.x >= 0 and arrow_direction.x >= abs(arrow_direction.y):
 		$AnimatedSprite2D.play("bow_east")
 
 func idle_animation():
@@ -197,8 +224,9 @@ func player():
 func _on_interacion_area_body_entered(body):
 	if body.is_in_group("npc"):
 		npc_in_range = true
-
+		print(npc_in_range)
 
 func _on_interacion_area_body_exited(body):
 	if body.is_in_group("npc"):
 		npc_in_range = false
+		print(npc_in_range)

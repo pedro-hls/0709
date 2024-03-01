@@ -1,3 +1,6 @@
+TileMap
+Timer
+RichTextLabel
 AnimatedSprite2D
 Control
 AnimationPlayer
@@ -9,6 +12,4 @@ Camera2D
 Sprite2D
 Node2D
 GridContainer
-RichTextLabel
 CollisionPolygon2D
-Timer

@@ -36,6 +36,7 @@ animations = [{
 }]
 
 [node name="grazi" type="CharacterBody2D" groups=["npc"]]
+y_sort_enabled = true
 position = Vector2(0, -16)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]

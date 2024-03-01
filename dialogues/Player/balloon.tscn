@@ -69,43 +69,43 @@ MarginContainer/constants/margin_right = 30
 MarginContainer/constants/margin_top = 15
 Panel/styles/panel = SubResource("StyleBoxFlat_uy0d5")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7s5pk"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wubon"]
 atlas = ExtResource("2_6otgm")
-region = Rect2(0, 0, 90, 32)
+region = Rect2(0, 128, 180, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_q681d"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6r2ux"]
 atlas = ExtResource("2_6otgm")
-region = Rect2(0, 64, 90, 32)
+region = Rect2(0, 192, 180, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rxh73"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1m4jn"]
 atlas = ExtResource("2_6otgm")
-region = Rect2(0, 96, 90, 32)
+region = Rect2(0, 64, 180, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lii3o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbeb1"]
 atlas = ExtResource("2_6otgm")
-region = Rect2(0, 128, 90, 32)
+region = Rect2(0, 0, 180, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_an10r"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7s5pk")
+"texture": SubResource("AtlasTexture_wubon")
 }],
 "loop": false,
-"name": &"gab",
+"name": &"Gab",
 "speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_q681d")
+"texture": SubResource("AtlasTexture_6r2ux")
 }],
 "loop": false,
-"name": &"grazi",
+"name": &"Grazi",
 "speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rxh73")
+"texture": SubResource("AtlasTexture_1m4jn")
 }],
 "loop": false,
 "name": &"left_box",
@@ -113,65 +113,89 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lii3o")
+"texture": SubResource("AtlasTexture_wbeb1")
 }],
 "loop": false,
 "name": &"right_box",
 "speed": 0.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a8rgg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_464vy"]
 atlas = ExtResource("8_phipy")
-region = Rect2(21, 21, 21, 21)
+region = Rect2(42, 0, 42, 58)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_81ylx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_trkb1"]
 atlas = ExtResource("8_phipy")
-region = Rect2(21, 42, 21, 21)
+region = Rect2(42, 58, 42, 58)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wcb35"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_uibl2"]
 atlas = ExtResource("8_phipy")
-region = Rect2(21, 63, 21, 21)
+region = Rect2(42, 116, 42, 58)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cargv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qktsp"]
 atlas = ExtResource("8_phipy")
-region = Rect2(42, 21, 21, 21)
+region = Rect2(84, 0, 42, 58)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fcdwm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_42rpt"]
 atlas = ExtResource("8_phipy")
-region = Rect2(42, 42, 21, 21)
+region = Rect2(84, 58, 42, 58)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fyw1x"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wk8fw"]
 atlas = ExtResource("8_phipy")
-region = Rect2(42, 63, 21, 21)
+region = Rect2(84, 116, 42, 58)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3pm4h"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_a8rgg")
+"texture": SubResource("AtlasTexture_464vy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_81ylx")
+"texture": SubResource("AtlasTexture_trkb1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wcb35")
+"texture": SubResource("AtlasTexture_464vy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trkb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_464vy")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_trkb1")
+}, {
+"duration": 0.2,
+"texture": SubResource("AtlasTexture_uibl2")
 }],
-"loop": false,
-"name": &"gab",
+"loop": true,
+"name": &"Gab",
 "speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cargv")
+"texture": SubResource("AtlasTexture_qktsp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fcdwm")
+"texture": SubResource("AtlasTexture_42rpt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fyw1x")
+"texture": SubResource("AtlasTexture_qktsp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42rpt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qktsp")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_42rpt")
+}, {
+"duration": 0.2,
+"texture": SubResource("AtlasTexture_wk8fw")
 }],
 "loop": true,
-"name": &"grazi",
+"name": &"Grazi",
 "speed": 2.0
 }]
 
@@ -179,9 +203,9 @@ animations = [{
 atlas = ExtResource("8_phipy")
 region = Rect2(20, 20, 1, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_usk8b"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qq1d"]
 atlas = ExtResource("8_phipy")
-region = Rect2(0, 0, 21, 21)
+region = Rect2(0, 0, 42, 58)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kygmt"]
 animations = [{
@@ -195,7 +219,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_usk8b")
+"texture": SubResource("AtlasTexture_6qq1d")
 }],
 "loop": false,
 "name": &"on",
@@ -216,20 +240,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_qq3yp")
 
-[node name="AnimationPlayer" type="AnimatedSprite2D" parent="Balloon"]
-position = Vector2(984, 952)
-scale = Vector2(8, 8)
-sprite_frames = SubResource("SpriteFrames_an10r")
-animation = &"left_box"
-
 [node name="CharacterLabel" type="RichTextLabel" parent="Balloon"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 0
-offset_left = 900.0
-offset_top = 764.0
-offset_right = 1119.0
-offset_bottom = 806.0
+offset_left = 887.0
+offset_top = 844.0
+offset_right = 1106.0
+offset_bottom = 886.0
 mouse_filter = 1
 theme_override_fonts/normal_font = ExtResource("3_noelu")
 theme_override_fonts/bold_font = ExtResource("4_564mm")
@@ -238,15 +256,22 @@ text = "Character"
 fit_content = true
 scroll_active = false
 
+[node name="background" type="AnimatedSprite2D" parent="Balloon"]
+unique_name_in_owner = true
+position = Vector2(984, 904)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_an10r")
+animation = &"Grazi"
+
 [node name="DialogueLabel" parent="Balloon" instance=ExtResource("2_a8ve6")]
 unique_name_in_owner = true
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
-offset_left = 696.0
-offset_top = 856.0
-offset_right = 1080.0
-offset_bottom = 978.0
+offset_left = 680.0
+offset_top = 796.0
+offset_right = 1085.0
+offset_bottom = 937.0
 grow_horizontal = 1
 scale = Vector2(1.5, 1.5)
 size_flags_vertical = 3
@@ -257,65 +282,95 @@ text = "Dialogue..."
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -63.0
-offset_right = -23.0
-offset_bottom = 40.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 
 [node name="ResponsesMenu" type="VBoxContainer" parent="Control" node_paths=PackedStringArray("response_template")]
 unique_name_in_owner = true
+clip_contents = true
 layout_mode = 0
-offset_left = 759.0
-offset_top = 911.0
-offset_right = 1143.0
-offset_bottom = 1007.0
+offset_left = 680.0
+offset_top = 856.0
+offset_right = 1085.0
+offset_bottom = 948.0
 scale = Vector2(1.5, 1.5)
 size_flags_vertical = 8
-theme_override_constants/separation = 2
+theme_override_constants/separation = 4
 script = ExtResource("3_72ixx")
 response_template = NodePath("ResponseExample")
 
 [node name="ResponseExample" type="Button" parent="Control/ResponsesMenu"]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme = ExtResource("6_ehbwv")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.054902, 0.341176, 0.290196, 1)
+theme_override_colors/font_pressed_color = Color(0.054902, 0.341176, 0.290196, 1)
+theme_override_colors/font_hover_color = Color(0.054902, 0.341176, 0.290196, 1)
+theme_override_colors/font_focus_color = Color(0.054902, 0.341176, 0.290196, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.054902, 0.341176, 0.290196, 1)
 theme_override_fonts/font = ExtResource("3_noelu")
 text = "Response example"
 
-[node name="image" type="Control" parent="."]
+[node name="who" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("8_w1j8d")
 
-[node name="npc_image" type="AnimatedSprite2D" parent="image"]
-position = Vector2(1444, 932)
-scale = Vector2(8, 8)
+[node name="player_image" type="AnimatedSprite2D" parent="who"]
+unique_name_in_owner = true
+position = Vector2(531, 908)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_3pm4h")
-animation = &"grazi"
+animation = &"Grazi"
 
-[node name="player_image" type="AnimatedSprite2D" parent="image"]
-position = Vector2(524, 932)
-scale = Vector2(8, 8)
-sprite_frames = SubResource("SpriteFrames_3pm4h")
-animation = &"gab"
+[node name="player_name" type="RichTextLabel" parent="who"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 447.0
+offset_top = 976.0
+offset_right = 552.0
+offset_bottom = 1001.0
+scale = Vector2(1.6, 1.6)
+theme_override_fonts/normal_font = ExtResource("3_noelu")
+theme_override_fonts/bold_font = ExtResource("4_564mm")
+bbcode_enabled = true
+text = "[center] Gab [/center]"
 
-[node name="npc_shadow" type="AnimatedSprite2D" parent="image"]
+[node name="player_shadow" type="AnimatedSprite2D" parent="who"]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.784314)
-position = Vector2(1444, 932)
-scale = Vector2(8, 8)
+position = Vector2(531, 908)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_kygmt")
 animation = &"on"
 
-[node name="player_shadow" type="AnimatedSprite2D" parent="image"]
+[node name="npc_image" type="AnimatedSprite2D" parent="who"]
+unique_name_in_owner = true
+position = Vector2(1436, 904)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_3pm4h")
+animation = &"Gab"
+
+[node name="npc_name" type="RichTextLabel" parent="who"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1352.0
+offset_top = 972.0
+offset_right = 1457.0
+offset_bottom = 997.0
+scale = Vector2(1.6, 1.6)
+theme_override_fonts/normal_font = ExtResource("3_noelu")
+theme_override_fonts/bold_font = ExtResource("4_564mm")
+bbcode_enabled = true
+text = "[center] Gab [/center]"
+
+[node name="npc_shadow" type="AnimatedSprite2D" parent="who"]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.784314)
-position = Vector2(524, 932)
-scale = Vector2(8, 8)
+position = Vector2(1436, 904)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_kygmt")
 animation = &"on"
 
